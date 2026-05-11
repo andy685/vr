@@ -1344,13 +1344,22 @@
 </tbody>
 </table>
 <hr />
-<h3 id="4-3-pc游戏终端">4.3 PC游戏终端</h3>
-<blockquote>
-<p><strong>定位</strong>: VR体验店现场的自助交互终端，顾客到店自行浏览游戏、选游戏、扫码支付、获取设备引导、查看结算<br />
-<strong>形态</strong>: Windows全屏kiosk应用（触摸屏），深蓝色沉浸式主题，放置在每台VR设备旁<br />
-<strong>核心原则</strong>: PC终端承担所有交互，VR头显内不做任何UI</p>
-</blockquote>
-<h4 id="状态流转">4.3.1 状态流转</h4>
+  <h3 id="4-3-pc游戏终端">4.3 PC游戏终端</h3>
+  <blockquote>
+  <p><strong>定位</strong>: VR体验店现场的自助交互终端（右脚点播系统），顾客到店自行浏览游戏、选游戏、扫码支付、获取设备引导、查看结算<br />
+  <strong>形态</strong>: Windows全屏kiosk应用（触摸屏），深蓝色沉浸式主题，放置在每台VR设备旁<br />
+  <strong>核心原则</strong>: PC终端承担所有交互，VR头显内不做任何UI</p>
+  </blockquote>
+  <div style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 8px; padding: 14px 18px; margin: 12px 0;">
+    <p style="font-size: 13px; margin: 0 0 4px 0; color: #fbbf24;"><strong>💡 补充说明 — 点播系统业务逻辑</strong></p>
+    <ul style="margin: 4px 0 0 16px; color: #e2e8f0;">
+      <li><strong>PC 游戏终端 = 右脚点播系统</strong>：每台 PC 终端即一个"点播系统"，顾客通过该终端选择并启动游戏。</li>
+      <li><strong>每台主机设备绑定一个点播系统</strong>：主机（PC 终端设备）与点播系统一一绑定，不可多台主机共用同一系统。</li>
+      <li><strong>系统归属门店账号下</strong>：点播系统隶属于具体门店，门店管理员可管理本店下的所有点播系统。</li>
+      <li><strong>游戏豆门店共享</strong>：同一门店下的所有点播系统共享该门店的游戏豆余额，任意终端消耗游戏豆均从门店总账户扣除。</li>
+    </ul>
+  </div>
+  <h4 id="状态流转">4.3.1 状态流转</h4>
 <table>
 <thead>
 <tr>
@@ -1682,10 +1691,20 @@
 <tr><td><strong>安装方式</strong></td><td>游戏包体通过WiFi Direct从PC终端直接传输到头显</td></tr>
 </tbody>
 </table>
-<h3 id="4-3-7-游戏运营设置兼容">4.3.7 游戏运营设置兼容（v1.4 新增）</h3>
-<blockquote>
-<p>PC 终端需兼容总运营后台在游戏库中配置的各项运营参数，包括游戏豆消耗、游戏类型、付费模式、时长限制。</p>
-</blockquote>
+  <h3 id="4-3-7-游戏运营设置兼容">4.3.7 游戏运营设置兼容（v1.5 新增）</h3>
+  <blockquote>
+  <p>PC 终端需兼容总运营后台在游戏库中配置的各项运营参数，包括运行平台、游戏豆消耗、玩法模式、付费模式、时长限制。</p>
+  </blockquote>
+  <h4 id="运行平台兼容">运行平台兼容（v1.5 新增）</h4>
+  <table>
+  <thead>
+  <tr><th>运行平台</th><th>说明</th></tr>
+  </thead>
+  <tbody>
+  <tr><td><strong>主机游戏</strong>（<code>host</code>）</td><td>游戏在 PC 主机上运行，画面串流到头显设备，适合高性能需求的游戏</td></tr>
+  <tr><td><strong>VR 头显一体机</strong>（<code>allInOne</code>）</td><td>游戏直接在 VR 头显上独立运行，无需 PC 主机支撑</td></tr>
+  </tbody>
+  </table>
 <h4 id="单人付费-多人付费兼容">单人付费 / 多人付费兼容</h4>
 <table>
 <thead>
@@ -1739,12 +1758,13 @@
 <li>提供「提前结束」按钮，按实际游玩时长结算</li>
 </ul>
 <p><strong>游戏详情接口返回的运营字段</strong>：</p>
-<pre><code>{
-  "gameBeanCost": 20,          // 游戏豆消耗（个/次/人）
-  "payMode": "single",         // single | multi
-  "gameType": "standalone",    // standalone | online
-  "timeLimitEnabled": true,    // 时长限制开关
-  "timeLimitMinutes": 10       // 限制时长（分钟）
+  <pre><code>{
+  "runPlatform": "host",         // host | allInOne
+  "gameBeanCost": 20,            // 游戏豆消耗（个/次/人）
+  "payMode": "single",           // single | multi
+  "gameType": "standalone",      // standalone | online
+  "timeLimitEnabled": true,      // 时长限制开关
+  "timeLimitMinutes": 10         // 限制时长（分钟）
 }</code></pre>
 <h3 id="4-3-8-设备绑定管理">4.3.8 设备绑定管理（主机↔头显）（v1.4 新增）</h3>
 <blockquote>
@@ -2960,16 +2980,21 @@
 <td>多款推荐游戏之间仍按排序号排列，推荐游戏始终排在非推荐游戏之前</td>
 <td style="text-align: center;">PC 终端 · 小程序</td>
 </tr>
-<tr>
-<td style="text-align: center;"><strong>游戏豆消耗</strong></td>
-<td>为每个游戏配置单次消耗的游戏豆数量（0表示免费），PC 终端详情页展示该消耗值；多人付费模式下总消耗 = 单个消耗 × 参与人数</td>
-<td style="text-align: center;">PC 终端</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>游戏类型</strong></td>
-<td>配置游戏为「单机游戏」（单人独立体验）或「联机游戏」（支持多台 VR 设备联网共同游戏），PC 终端根据类型展示对应的游戏说明和交互方式</td>
-<td style="text-align: center;">PC 终端</td>
-</tr>
+  <tr>
+  <td style="text-align: center;"><strong>游戏豆消耗</strong></td>
+  <td>为每个游戏配置单次消耗的游戏豆数量（0表示免费），PC 终端详情页展示该消耗值；多人付费模式下总消耗 = 单个消耗 × 参与人数</td>
+  <td style="text-align: center;">PC 终端</td>
+  </tr>
+  <tr>
+  <td style="text-align: center;"><strong>运行平台</strong>（v1.5）</td>
+  <td>配置游戏为「主机游戏」（游戏在 PC 主机上运行，画面串流到头显）或「VR 头显一体机游戏」（游戏直接在头显上运行），PC 终端根据平台类型展示对应的游戏说明和运行方式</td>
+  <td style="text-align: center;">PC 终端</td>
+  </tr>
+  <tr>
+  <td style="text-align: center;"><strong>玩法模式</strong></td>
+  <td>配置游戏为「单机游戏」（单人独立体验）或「联机游戏」（支持多台 VR 设备联网共同游戏），PC 终端根据类型展示对应的游戏说明和交互方式</td>
+  <td style="text-align: center;">PC 终端</td>
+  </tr>
 <tr>
 <td style="text-align: center;"><strong>时长限制</strong></td>
 <td>开关 + 限制时长（分钟），开启后游戏时间到自动结束；PC 终端监控面板显示倒计时，关闭则不限制时长</td>
