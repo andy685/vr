@@ -955,14 +955,13 @@
 </table>
 <h5>支付失败页（failed 状态）</h5>
 <table>
-<thead><tr><th>场景</th><th>展示标题</th><th>说明</th><th>触发条件</th></tr></thead>
+<thead><tr><th>场景</th><th>展示标题</th><th>说明</th></tr></thead>
 <tbody>
-<tr><td>订单已失效</td><td>订单已失效</td><td>订单超时或已被使用</td><td>后端返回 <code>order_status = expired/cancelled</code>，如订单超过有效期、已被他人支付、设备端取消订单</td></tr>
-<tr><td>支付超时</td><td>支付超时</td><td>支付处理超时</td><td>点击确认支付后，微信支付 API 在 30~60 秒内无响应，前端请求超时或后端回调超时</td></tr>
-<tr><td>余额不足</td><td>余额不足</td><td>微信支付余额不足</td><td>微信支付 JSAPI 返回失败，用户微信零钱/银行卡余额不足以覆盖剩余应付金额</td></tr>
+<tr><td>订单已失效</td><td>订单已失效</td><td>订单超时或已被使用</td></tr>
+<tr><td>支付超时</td><td>支付超时</td><td>支付处理超时</td></tr>
+<tr><td>余额不足</td><td>余额不足</td><td>微信支付余额不足</td></tr>
 </tbody>
 </table>
-<blockquote><p><strong>注意</strong>：<code>failTitle</code> 由调用方（父组件 / 后端 API 返回）通过 prop 传入，MiniPayFlow 组件不自行判断失败类型。</p></blockquote>
 <p><strong>失败处理指引</strong>：返回设备端重新展示付款码 → 确认网络正常后再次发起支付 → 如已扣款，稍后在订单中心查看结果</p>
 <h5>场景示例（8 种覆盖主流组合）</h5>
 <blockquote><p>以下示例原价 38 元，基础会员折扣 9 折</p></blockquote>
